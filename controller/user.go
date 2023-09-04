@@ -9,11 +9,14 @@ import (
 )
 
 type CreateLoginInput struct {
-	Email    string `json:"email" binding:"required"`
-	Password string `json:"password" binding:"required"`
+	Name           string `json:"name" binding:"required"`
+	Email          string `json:"email" binding:"required"`
+	Password       string `json:"password" binding:"required"`
+	ForgotPassword string `json:"forgot password" binding:"required"`
 }
 
 func CreateLogin(c *gin.Context) {
+
 	// Validate input
 	var input CreateLoginInput
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -22,7 +25,7 @@ func CreateLogin(c *gin.Context) {
 	}
 
 	// Create login
-	login := models.User{Email: input.Email, Password: input.Password}
+	login := models.User{Name: input.Name, Email: input.Email, Password: input.Password, ForgotPassword: input.ForgotPassword}
 	models.DB.Create(&login)
 
 	c.JSON(http.StatusOK, gin.H{"data": login})
