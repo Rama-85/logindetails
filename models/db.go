@@ -1,8 +1,6 @@
-package config
+package models
 
 import (
-	"logindetails/models"
-
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -14,7 +12,7 @@ func ConnectDB() {
 	if err != nil {
 		panic("Failed to connect to database!")
 	}
-	err = db.AutoMigrate(&models.User{})
+	err = db.AutoMigrate(&User{})
 	if err != nil {
 		return
 	}

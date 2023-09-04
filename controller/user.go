@@ -3,9 +3,15 @@ package controller
 import (
 	"net/http"
 
-	"github.com/Rama-85/logindetails/models"
+	"logindetails/models"
+
 	"github.com/gin-gonic/gin"
 )
+
+type CreateLoginInput struct {
+	Email    string `json:"email" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}
 
 func CreateLogin(c *gin.Context) {
 	// Validate input
